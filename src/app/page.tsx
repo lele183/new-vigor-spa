@@ -2,6 +2,8 @@ import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { ReviewsCarousel, type ReviewCardData } from "./reviews-carousel";
+import { GalleryGrid, type GalleryPhoto } from "./gallery-grid";
+import { ScrollReveal } from "./scroll-reveal";
 
 const NAV_LINKS = [
   { label: "HOME", href: "#home" },
@@ -95,13 +97,19 @@ const SOCIAL_LINKS = [
 ] as const;
 
 const GALLERY_IMAGES = [
-  { src: "/images/gallery-1.jpg", alt: "New Vigor Foot Spa treatment room" },
-  { src: "/images/gallery-2.jpg", alt: "New Vigor Foot Spa relaxation area" },
-  { src: "/images/gallery-3.jpg", alt: "New Vigor Foot Spa therapy session" },
-  { src: "/images/gallery-4.jpg", alt: "New Vigor Foot Spa ambiance" },
-  { src: "/images/gallery-5.jpg", alt: "New Vigor Foot Spa decor" },
-  { src: "/images/service-stones.jpg", alt: "Hot stone therapy at New Vigor Foot Spa" },
-] as const;
+  { src: "/images/gallery-reception.webp", alt: "Welcoming reception desk and plants at New Vigor Foot Spa", caption: "A warm welcome" },
+  { src: "/images/gallery-reflexology-lounge.webp", alt: "Reclining foot massage chairs with fresh towels and screen dividers", caption: "Foot reflexology lounge" },
+  { src: "/images/gallery-foot-reflexology.webp", alt: "Therapist massaging a guest's feet with coconut oil", caption: "Foot reflexology" },
+  { src: "/images/gallery-treatment-room.webp", alt: "Massage beds with red covers, fresh linens and softly lit screen dividers", caption: "Room to unwind" },
+  { src: "/images/gallery-hot-stones.webp", alt: "Smooth hot stones used during a back massage", caption: "Hot stone therapy" },
+  { src: "/images/gallery-massage-room.webp", alt: "Private massage room with fresh linens and soft lighting", caption: "Your peaceful escape" },
+  { src: "/images/gallery-neck-shoulder.webp", alt: "Therapist applying pressure to a guest's neck and shoulders", caption: "Neck & shoulder care" },
+  { src: "/images/gallery-aromatherapy.webp", alt: "Aromatherapy oils and New Vigor Foot Spa business cards at the front desk", caption: "Thoughtful touches" },
+  { src: "/images/gallery-deep-tissue.webp", alt: "Therapist using hands and knuckles for a deep tissue back massage", caption: "Deep tissue massage" },
+  { src: "/images/gallery-fresh-linens.webp", alt: "Neatly folded towels and massage supplies in the spa", caption: "Ready for your visit" },
+  { src: "/images/gallery-private-room.webp", alt: "A cozy massage bed beside a warm lamp and a flower arrangement", caption: "A moment of calm" },
+  { src: "/images/gallery-gift-certificates.webp", alt: "New Vigor Foot Spa gift certificates with pink envelopes", caption: "Give the gift of relaxation" },
+] as const satisfies readonly GalleryPhoto[];
 
 function Navbar() {
   return (
@@ -174,12 +182,14 @@ function Services() {
   return (
     <section id="services" className="bg-bg-cream py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="mb-16 text-center font-serif text-4xl text-brown-deep md:text-5xl">
-          Our Services
-        </h2>
+        <ScrollReveal>
+          <h2 className="mb-16 text-center font-serif text-4xl text-brown-deep md:text-5xl">
+            Our Services
+          </h2>
+        </ScrollReveal>
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-          {SERVICES.map((service) => (
-            <div key={service.title} className="flex flex-col items-center">
+          {SERVICES.map((service, index) => (
+            <ScrollReveal key={service.title} delay={index * 80} className="flex flex-col items-center">
               <div className="mb-6 size-48 overflow-hidden rounded-full shadow-lg">
                 <img
                   src={service.image}
@@ -190,7 +200,7 @@ function Services() {
               <h3 className="font-serif text-xl text-brown-deep">
                 {service.title}
               </h3>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -202,16 +212,18 @@ function Prices() {
   return (
     <section id="prices" className="bg-white py-24">
       <div className="mx-auto max-w-4xl px-6 text-center">
-        <h2 className="mb-12 font-serif text-4xl text-brown-deep md:text-5xl">
-          Services &amp; Pricing
-        </h2>
-        <div className="overflow-hidden rounded-xl shadow-lg">
+        <ScrollReveal>
+          <h2 className="mb-12 font-serif text-4xl text-brown-deep md:text-5xl">
+            Services &amp; Pricing
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal className="overflow-hidden rounded-xl shadow-lg">
           <img
             src="/images/price.jpg"
             alt="New Vigor Foot Spa price list"
             className="w-full"
           />
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
@@ -220,7 +232,7 @@ function Prices() {
 function About() {
   return (
     <section id="about" className="bg-white py-24">
-      <div className="mx-auto max-w-4xl px-6 text-center">
+      <ScrollReveal className="mx-auto max-w-4xl px-6 text-center">
         <h2 className="mb-8 font-serif text-4xl text-brown-deep md:text-5xl">
           About Us
         </h2>
@@ -231,7 +243,7 @@ function About() {
           Step into our tranquil sanctuary and let your journey to wellness
           begin.
         </p>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }
@@ -308,7 +320,7 @@ function GoogleMapsAttribution() {
 function ReviewsFallback({ status = "loading" }: { status?: string }) {
   return (
     <section id="reviews" className="bg-bg-cream py-16 md:py-20" data-review-status={status}>
-      <div className="mx-auto max-w-7xl px-6 text-center">
+      <ScrollReveal className="mx-auto max-w-7xl px-6 text-center">
         <p className="mb-3 text-xs font-semibold tracking-[0.25em] text-accent uppercase">
           Guest Experiences
         </p>
@@ -331,7 +343,7 @@ function ReviewsFallback({ status = "loading" }: { status?: string }) {
             <span className="ml-2" aria-hidden="true">↗</span>
           </a>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }
@@ -362,7 +374,7 @@ async function GoogleReviews() {
   return (
     <section id="reviews" className="bg-bg-cream py-16 md:py-20" data-review-status="ready">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-8 flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
+        <ScrollReveal className="mb-8 flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
           <div>
             <p className="mb-3 text-xs font-semibold tracking-[0.25em] text-accent uppercase">
               Guest Experiences
@@ -400,9 +412,11 @@ async function GoogleReviews() {
               ↗
             </span>
           </a>
-        </div>
+        </ScrollReveal>
 
-        <ReviewsCarousel reviews={reviewCards} />
+        <ScrollReveal delay={80}>
+          <ReviewsCarousel reviews={reviewCards} />
+        </ScrollReveal>
 
         <div className="mt-5 flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
           <GoogleMapsAttribution />
@@ -419,20 +433,18 @@ function Gallery() {
   return (
     <section id="gallery" className="bg-bg-warm py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="mb-16 text-center font-serif text-4xl text-brown-deep md:text-5xl">
-          Gallery
-        </h2>
-        <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-          {GALLERY_IMAGES.map((img, i) => (
-            <div key={i} className="mb-4 break-inside-avoid overflow-hidden rounded-lg shadow-md">
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="w-full object-cover transition-transform duration-300 hover:scale-110"
-              />
-            </div>
-          ))}
-        </div>
+        <ScrollReveal className="mb-10 text-center">
+          <p className="mb-3 text-xs font-semibold tracking-[0.25em] text-accent uppercase">
+            Inside the spa
+          </p>
+          <h2 className="font-serif text-4xl text-brown-deep md:text-5xl">
+            Gallery
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg leading-relaxed text-gray-600">
+            A glimpse of our space, our care, and your next moment of relaxation.
+          </p>
+        </ScrollReveal>
+        <GalleryGrid photos={GALLERY_IMAGES} />
       </div>
     </section>
   );
@@ -442,13 +454,15 @@ function Contact() {
   return (
     <section id="contact" className="bg-brown-deep py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="mb-4 text-center font-serif text-4xl text-white md:text-5xl">
-          Get in Touch
-        </h2>
-        <p className="mb-12 text-center text-gray-400">
-          Follow us on social media or give us a call
-        </p>
-        <div className="mb-16 flex flex-wrap justify-center gap-4">
+        <ScrollReveal>
+          <h2 className="mb-4 text-center font-serif text-4xl text-white md:text-5xl">
+            Get in Touch
+          </h2>
+          <p className="mb-12 text-center text-gray-400">
+            Follow us on social media or give us a call
+          </p>
+        </ScrollReveal>
+        <ScrollReveal delay={70} className="mb-16 flex flex-wrap justify-center gap-4">
           {SOCIAL_LINKS.map((link) => (
             <a
               key={link.label}
@@ -461,8 +475,8 @@ function Contact() {
               {link.label}
             </a>
           ))}
-        </div>
-        <div className="mx-auto max-w-[600px] overflow-hidden rounded-xl shadow-lg">
+        </ScrollReveal>
+        <ScrollReveal className="mx-auto max-w-[600px] overflow-hidden rounded-xl shadow-lg">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3017.76892869825!2d-73.19827942310026!3d40.854996771372434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e83a17a066dead%3A0xd5e22159224b7c6a!2sNew%20Vigor%20Foot%20Spa!5e0!3m2!1sen!2sus!4v1780090880266!5m2!1sen!2sus"
             width="100%"
@@ -473,7 +487,7 @@ function Contact() {
             referrerPolicy="no-referrer-when-downgrade"
             title="New Vigor Foot Spa location"
           />
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
