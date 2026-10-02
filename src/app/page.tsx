@@ -97,18 +97,90 @@ const SOCIAL_LINKS = [
 ] as const;
 
 const GALLERY_IMAGES = [
-  { src: "/images/gallery-reception.webp", alt: "Welcoming reception desk and plants at New Vigor Foot Spa", caption: "A warm welcome" },
-  { src: "/images/gallery-reflexology-lounge.webp", alt: "Reclining foot massage chairs with fresh towels and screen dividers", caption: "Foot reflexology lounge" },
-  { src: "/images/gallery-foot-reflexology.webp", alt: "Therapist massaging a guest's feet with coconut oil", caption: "Foot reflexology" },
-  { src: "/images/gallery-treatment-room.webp", alt: "Massage beds with red covers, fresh linens and softly lit screen dividers", caption: "Room to unwind" },
-  { src: "/images/gallery-hot-stones.webp", alt: "Smooth hot stones used during a back massage", caption: "Hot stone therapy" },
-  { src: "/images/gallery-massage-room.webp", alt: "Private massage room with fresh linens and soft lighting", caption: "Your peaceful escape" },
-  { src: "/images/gallery-neck-shoulder.webp", alt: "Therapist applying pressure to a guest's neck and shoulders", caption: "Neck & shoulder care" },
-  { src: "/images/gallery-aromatherapy.webp", alt: "Aromatherapy oils and New Vigor Foot Spa business cards at the front desk", caption: "Thoughtful touches" },
-  { src: "/images/gallery-deep-tissue.webp", alt: "Therapist using hands and knuckles for a deep tissue back massage", caption: "Deep tissue massage" },
-  { src: "/images/gallery-fresh-linens.webp", alt: "Neatly folded towels and massage supplies in the spa", caption: "Ready for your visit" },
-  { src: "/images/gallery-private-room.webp", alt: "A cozy massage bed beside a warm lamp and a flower arrangement", caption: "A moment of calm" },
-  { src: "/images/gallery-gift-certificates.webp", alt: "New Vigor Foot Spa gift certificates with pink envelopes", caption: "Give the gift of relaxation" },
+  {
+    src: "/images/gallery-reception-full.webp",
+    alt: "Welcoming reception desk and plants at New Vigor Foot Spa",
+    caption: "A warm welcome",
+    width: 1280,
+    height: 853,
+  },
+  {
+    src: "/images/gallery-foot-reflexology-full.webp",
+    alt: "Therapist massaging a guest's feet with coconut oil",
+    caption: "Foot reflexology",
+    width: 853,
+    height: 1280,
+  },
+  {
+    src: "/images/gallery-storefront-full.webp",
+    alt: "New Vigor Foot Spa storefront on West Main Street in Smithtown",
+    caption: "Find us in Smithtown",
+    width: 1280,
+    height: 853,
+  },
+  {
+    src: "/images/gallery-treatment-room-full.webp",
+    alt: "Massage beds with red covers, fresh linens and softly lit screen dividers",
+    caption: "Room to unwind",
+    width: 1280,
+    height: 853,
+  },
+  {
+    src: "/images/gallery-hot-stones-full.webp",
+    alt: "Therapist using smooth hot stones during a back massage",
+    caption: "Hot stone therapy",
+    width: 1280,
+    height: 854,
+  },
+  {
+    src: "/images/gallery-private-room-full.webp",
+    alt: "A cozy massage bed beside a warm lamp and a flower arrangement",
+    caption: "A moment of calm",
+    width: 853,
+    height: 1280,
+  },
+  {
+    src: "/images/gallery-reflexology-lounge-full.webp",
+    alt: "Reclining foot massage chairs with fresh towels and screen dividers",
+    caption: "Foot reflexology lounge",
+    width: 1280,
+    height: 854,
+  },
+  {
+    src: "/images/gallery-massage-room-full.webp",
+    alt: "Massage beds prepared with fresh linens and screen dividers",
+    caption: "Your peaceful escape",
+    width: 1280,
+    height: 854,
+  },
+  {
+    src: "/images/gallery-neck-shoulder-full.webp",
+    alt: "Therapist applying pressure to a guest's neck and shoulders",
+    caption: "Neck & shoulder care",
+    width: 853,
+    height: 1280,
+  },
+  {
+    src: "/images/gallery-deep-tissue-full.webp",
+    alt: "Therapist applying firm pressure to a guest's back during a massage",
+    caption: "Deep tissue massage",
+    width: 1280,
+    height: 854,
+  },
+  {
+    src: "/images/gallery-cupping-full.webp",
+    alt: "Clear glass cupping jars neatly arranged on a tray",
+    caption: "Traditional cupping",
+    width: 1280,
+    height: 853,
+  },
+  {
+    src: "/images/gallery-gift-certificates-full.webp",
+    alt: "New Vigor Foot Spa gift certificates with pink envelopes",
+    caption: "Give the gift of relaxation",
+    width: 1280,
+    height: 853,
+  },
 ] as const satisfies readonly GalleryPhoto[];
 
 function Navbar() {
@@ -433,16 +505,10 @@ function Gallery() {
   return (
     <section id="gallery" className="bg-bg-warm py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <ScrollReveal className="mb-10 text-center">
-          <p className="mb-3 text-xs font-semibold tracking-[0.25em] text-accent uppercase">
-            Inside the spa
-          </p>
-          <h2 className="font-serif text-4xl text-brown-deep md:text-5xl">
+        <ScrollReveal>
+          <h2 className="mb-16 text-center font-serif text-4xl text-brown-deep md:text-5xl">
             Gallery
           </h2>
-          <p className="mx-auto mt-4 max-w-lg leading-relaxed text-gray-600">
-            A glimpse of our space, our care, and your next moment of relaxation.
-          </p>
         </ScrollReveal>
         <GalleryGrid photos={GALLERY_IMAGES} />
       </div>

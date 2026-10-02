@@ -8,6 +8,8 @@ export type GalleryPhoto = {
   src: string;
   alt: string;
   caption: string;
+  width: number;
+  height: number;
 };
 
 export function GalleryGrid({ photos }: { photos: readonly GalleryPhoto[] }) {
@@ -38,26 +40,24 @@ export function GalleryGrid({ photos }: { photos: readonly GalleryPhoto[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-3">
+      <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
         {photos.map((photo, index) => (
-          <ScrollReveal key={photo.src} delay={(index % 3) * 70}>
+          <ScrollReveal key={photo.src} delay={(index % 3) * 70} className="mb-4 break-inside-avoid">
             <button
               type="button"
               onClick={() => setActiveIndex(index)}
               aria-label={`Enlarge photo: ${photo.caption}`}
               aria-haspopup="dialog"
-              className="group relative block aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-xl bg-brown-deep/10 shadow-sm outline-offset-4 transition-shadow hover:shadow-lg focus-visible:outline-2 focus-visible:outline-accent"
+              className="group relative block w-full cursor-zoom-in overflow-hidden rounded-lg bg-brown-deep/10 shadow-md outline-offset-4 transition-shadow hover:shadow-lg focus-visible:outline-2 focus-visible:outline-accent"
             >
               <Image
                 src={photo.src}
                 alt={photo.alt}
-                fill
-                sizes="(min-width: 1280px) 390px, (min-width: 1024px) 32vw, 48vw"
-                className="object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
+                width={photo.width}
+                height={photo.height}
+                sizes="(min-width: 1280px) 400px, (min-width: 1024px) 32vw, (min-width: 640px) 48vw, 100vw"
+                className="h-auto w-full transition-transform duration-500 ease-out motion-safe:group-hover:scale-105"
               />
-              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-3 pt-10 pb-3 text-left text-xs font-medium text-white sm:px-4 sm:pb-4 sm:text-sm">
-                {photo.caption}
-              </span>
               <span className="absolute right-3 top-3 flex size-7 items-center justify-center rounded-full bg-black/30 text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-4">
                   <path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" />
